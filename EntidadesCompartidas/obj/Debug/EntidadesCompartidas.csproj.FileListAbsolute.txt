@@ -1,0 +1,5 @@
+C:\Users\carlo\Desktop\BiosNews - Persistencia\EntidadesCompartidas\bin\Debug\EntidadesCompartidas.dll
+C:\Users\carlo\Desktop\BiosNews - Persistencia\EntidadesCompartidas\bin\Debug\EntidadesCompartidas.pdb
+C:\Users\carlo\Desktop\BiosNews - Persistencia\EntidadesCompartidas\obj\Debug\EntidadesCompartidas.dll
+C:\Users\carlo\Desktop\BiosNews - Persistencia\EntidadesCompartidas\obj\Debug\EntidadesCompartidas.pdb
+C:\Users\carlo\Desktop\BiosNews - Persistencia\EntidadesCompartidas\obj\Debug\EntidadesCompartidas.csprojResolveAssemblyReference.cache

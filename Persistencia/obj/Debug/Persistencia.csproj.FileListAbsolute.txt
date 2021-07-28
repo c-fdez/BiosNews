@@ -1,0 +1,7 @@
+C:\Users\carlo\Desktop\BiosNews - Persistencia\Persistencia\bin\Debug\Persistencia.dll
+C:\Users\carlo\Desktop\BiosNews - Persistencia\Persistencia\bin\Debug\Persistencia.pdb
+C:\Users\carlo\Desktop\BiosNews - Persistencia\Persistencia\bin\Debug\EntidadesCompartidas.dll
+C:\Users\carlo\Desktop\BiosNews - Persistencia\Persistencia\bin\Debug\EntidadesCompartidas.pdb
+C:\Users\carlo\Desktop\BiosNews - Persistencia\Persistencia\obj\Debug\Persistencia.csprojResolveAssemblyReference.cache
+C:\Users\carlo\Desktop\BiosNews - Persistencia\Persistencia\obj\Debug\Persistencia.dll
+C:\Users\carlo\Desktop\BiosNews - Persistencia\Persistencia\obj\Debug\Persistencia.pdb
