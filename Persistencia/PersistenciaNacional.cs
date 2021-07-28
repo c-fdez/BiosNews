@@ -194,12 +194,22 @@ namespace Persistencia
                     string contenido = (string)lector["Contenido"];
                     int importancia = (int)lector["Importancia"];
 
+                    //Busco el empleado
                     string NomUsu = (string)lector["NomUsu"];
                     Empleado auxEmpleado = PersistenciaEmpleado.GetInstancia().Buscar(NomUsu);
 
+                    //Busco los periodistas de la noticia
+                    List<int> list = PersistenciaEscriben.GetInstancia().List(codint);
+                    List<Periodista> ListPeriodistas = null;
+                    foreach (int ci in list)
+                    {
+                        ListPeriodistas.Add(PersistenciaPeriodista.GetInstancia().BuscarTodos(ci));
+                    }
+
+                    //Busco la seccion a la que pertenece la noticia
                     Seccion auxSeccion = PersistenciaSeccion.GetInstancia().BuscarTodos(codint);
 
-                    //listNacional.Add(new Nacional(codint, fecha, titulo, contenido, importancia, auxEmpleado, auxSeccion));
+                    listNacional.Add(new Nacional(codint, fecha, titulo, contenido, importancia, ListPeriodistas, auxEmpleado, auxSeccion));
                 }
                 lector.Close();
             }
