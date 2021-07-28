@@ -91,7 +91,6 @@ namespace Persistencia
                 throw new Exception("DataBase: " + ex.Message);
             }
         }
-
         internal List<int> List(string pCodInt)
         {
             SqlConnection cnn = new SqlConnection(Conexion.Cnn);

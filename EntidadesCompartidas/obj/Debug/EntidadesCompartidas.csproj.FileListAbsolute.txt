@@ -1,5 +1,10 @@
-C:\Users\carlo\Desktop\BiosNews - Persistencia\EntidadesCompartidas\bin\Debug\EntidadesCompartidas.dll
-C:\Users\carlo\Desktop\BiosNews - Persistencia\EntidadesCompartidas\bin\Debug\EntidadesCompartidas.pdb
-C:\Users\carlo\Desktop\BiosNews - Persistencia\EntidadesCompartidas\obj\Debug\EntidadesCompartidas.dll
-C:\Users\carlo\Desktop\BiosNews - Persistencia\EntidadesCompartidas\obj\Debug\EntidadesCompartidas.pdb
-C:\Users\carlo\Desktop\BiosNews - Persistencia\EntidadesCompartidas\obj\Debug\EntidadesCompartidas.csprojResolveAssemblyReference.cache
+C:/Users/carlo/Desktop/BiosNews - Persistencia/EntidadesCompartidas/bin/Debug/EntidadesCompartidas.dll
+C:/Users/carlo/Desktop/BiosNews - Persistencia/EntidadesCompartidas/bin/Debug/EntidadesCompartidas.pdb
+C:/Users/carlo/Desktop/BiosNews - Persistencia/EntidadesCompartidas/obj/Debug/EntidadesCompartidas.dll
+C:/Users/carlo/Desktop/BiosNews - Persistencia/EntidadesCompartidas/obj/Debug/EntidadesCompartidas.pdb
+C:/Users/carlo/Desktop/BiosNews - Persistencia/EntidadesCompartidas/obj/Debug/EntidadesCompartidas.csprojResolveAssemblyReference.cache
+/Users/carlosfernandezhernandez/Projects/BiosNews/EntidadesCompartidas/bin/Debug/EntidadesCompartidas.dll
+/Users/carlosfernandezhernandez/Projects/BiosNews/EntidadesCompartidas/bin/Debug/EntidadesCompartidas.pdb
+/Users/carlosfernandezhernandez/Projects/BiosNews/EntidadesCompartidas/obj/Debug/EntidadesCompartidas.csproj.CoreCompileInputs.cache
+/Users/carlosfernandezhernandez/Projects/BiosNews/EntidadesCompartidas/obj/Debug/EntidadesCompartidas.dll
+/Users/carlosfernandezhernandez/Projects/BiosNews/EntidadesCompartidas/obj/Debug/EntidadesCompartidas.pdb

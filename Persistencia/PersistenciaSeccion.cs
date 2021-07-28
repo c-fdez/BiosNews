@@ -201,7 +201,6 @@ namespace Persistencia
                     string codint = (string)lector["CodInt"];
                     string nombre = (string)lector["Nombre"];
 
-
                     listSecciones.Add(new Seccion(codint, nombre));
                 }
                 lector.Close();
