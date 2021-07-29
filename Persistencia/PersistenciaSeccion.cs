@@ -26,7 +26,8 @@ namespace Persistencia
         public void Alta(Seccion pSeccion)
         {
             SqlConnection cnn = new SqlConnection(Conexion.Cnn);
-            SqlCommand cmd = new SqlCommand("AltaSeccion ", cnn);
+
+            SqlCommand cmd = new SqlCommand("AltaSeccion", cnn);
             cmd.CommandType = CommandType.StoredProcedure;
 
             cmd.Parameters.AddWithValue("@CodInt ", pSeccion.CodInt);
@@ -43,7 +44,6 @@ namespace Persistencia
 
                 if ((int)retorno.Value == -1)
                     throw new Exception("Ya existe la Sección.");
-
             }
             catch (Exception ex)
             {
@@ -55,6 +55,7 @@ namespace Persistencia
         public void Baja(Seccion pSeccion)
         {
             SqlConnection cnn = new SqlConnection(Conexion.Cnn);
+
             SqlCommand cmd = new SqlCommand("BajaSeccion", cnn);
             cmd.CommandType = CommandType.StoredProcedure;
 
@@ -89,6 +90,7 @@ namespace Persistencia
         public void Modificar(Seccion pSeccion)
         {
             SqlConnection cnn = new SqlConnection(Conexion.Cnn);
+
             SqlCommand cmd = new SqlCommand("ModificarSeccion", cnn);
             cmd.CommandType = CommandType.StoredProcedure;
 
@@ -124,6 +126,7 @@ namespace Persistencia
         public Seccion Buscar(string pCodInt)
         {
             SqlConnection cnn = new SqlConnection(Conexion.Cnn);
+
             SqlCommand cmd = new SqlCommand("BuscarSeccionActivo", cnn);
             cmd.CommandType = CommandType.StoredProcedure;
 
@@ -136,8 +139,9 @@ namespace Persistencia
                 cnn.Open();
                 SqlDataReader lector = cmd.ExecuteReader();
 
-                if (lector.Read())
+                if (lector.HasRows)
                 {
+                    lector.Read();
                     string nombre = (string)lector["Nombre"];
 
                     auxSeccion = new Seccion(pCodInt, nombre);
@@ -155,6 +159,7 @@ namespace Persistencia
         internal Seccion BuscarTodos(string pCodInt)
         {
             SqlConnection cnn = new SqlConnection(Conexion.Cnn);
+
             SqlCommand cmd = new SqlCommand("BuscarSeccion", cnn);
             cmd.CommandType = CommandType.StoredProcedure;
 
@@ -167,8 +172,9 @@ namespace Persistencia
                 cnn.Open();
                 SqlDataReader lector = cmd.ExecuteReader();
 
-                if (lector.Read())
+                if (lector.HasRows)
                 {
+                    lector.Read();
                     string nombre = (string)lector["Nombre"];
 
                     auxSeccion = new Seccion(pCodInt, nombre);
@@ -186,6 +192,7 @@ namespace Persistencia
         public List<Seccion> Listar()
         {
             SqlConnection cnn = new SqlConnection(Conexion.Cnn);
+
             SqlCommand cmd = new SqlCommand("ListarSecciones", cnn);
             cmd.CommandType = CommandType.StoredProcedure;
 
@@ -196,8 +203,9 @@ namespace Persistencia
                 cnn.Open();
                 SqlDataReader lector = cmd.ExecuteReader();
 
-                while (lector.Read())
+                while (lector.HasRows)
                 {
+                    lector.Read();
                     string codint = (string)lector["CodInt"];
                     string nombre = (string)lector["Nombre"];
 
@@ -213,6 +221,5 @@ namespace Persistencia
             { cnn.Close(); }
             return listSecciones;
         }
-
     }
 }

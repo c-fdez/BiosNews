@@ -67,13 +67,14 @@ namespace Persistencia
                 cnn.Open();
                 SqlDataReader lector = cmd.ExecuteReader();
 
-                if (lector.Read())
+                if (lector.HasRows)
                 {
+                    lector.Read();
                     string pass = (string)lector["Pass"];
 
                     auxEmpleado = new Empleado(pNomUsu, pass);
                 }
-                lector.Close();  
+                lector.Close();
 
             }
             catch (Exception ex)

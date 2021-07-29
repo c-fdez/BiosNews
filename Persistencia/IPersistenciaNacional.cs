@@ -9,5 +9,10 @@ namespace Persistencia
 {
     interface IPersistenciaNacional
     {
+        void Alta(Nacional pNacional);
+        void Modificar(Nacional pNacional);
+        Nacional Buscar(string pCodInt);
+        List<Nacional> ListarDefault();
+        List<Nacional> ListarPublicados();
     }
 }

@@ -26,6 +26,7 @@ namespace Persistencia
         public void Alta(Periodista pPeriodista)
         {
             SqlConnection cnn = new SqlConnection(Conexion.Cnn);
+
             SqlCommand cmd = new SqlCommand("AltaPeriodista", cnn);
             cmd.CommandType = CommandType.StoredProcedure;
 
@@ -44,7 +45,6 @@ namespace Persistencia
 
                 if ((int)retorno.Value == -1)
                     throw new Exception("Ya existe el periodista.");
-
             }
             catch (Exception ex)
             {
@@ -56,6 +56,7 @@ namespace Persistencia
         public void Baja(Periodista pPeriodista)
         {
             SqlConnection cnn = new SqlConnection(Conexion.Cnn);
+
             SqlCommand cmd = new SqlCommand("BajaPeriodista", cnn);
             cmd.CommandType = CommandType.StoredProcedure;
 
@@ -90,6 +91,7 @@ namespace Persistencia
         public void Modificar(Periodista pPeriodista)
         {
             SqlConnection cnn = new SqlConnection(Conexion.Cnn);
+
             SqlCommand cmd = new SqlCommand("ModificarPeriodista", cnn);
             cmd.CommandType = CommandType.StoredProcedure;
 
@@ -126,6 +128,7 @@ namespace Persistencia
         public Periodista Buscar(int pCI)
         {
             SqlConnection cnn = new SqlConnection(Conexion.Cnn);
+
             SqlCommand cmd = new SqlCommand("BuscarPeriodistaActivo", cnn);
             cmd.CommandType = CommandType.StoredProcedure;
 
@@ -138,10 +141,12 @@ namespace Persistencia
                 cnn.Open();
                 SqlDataReader lector = cmd.ExecuteReader();
 
-                if (lector.Read())
+                if (lector.HasRows)
                 {
+                    lector.Read();
                     string nombre = (string)lector["Nombre"];
                     string mail = (string)lector["Mail"];
+
                     auxPeriodista = new Periodista(pCI, nombre, mail);
                 }
                 lector.Close();
@@ -157,6 +162,7 @@ namespace Persistencia
         internal Periodista BuscarTodos(int pCI)
         {
             SqlConnection cnn = new SqlConnection(Conexion.Cnn);
+
             SqlCommand cmd = new SqlCommand("BuscarPeriodista", cnn);
             cmd.CommandType = CommandType.StoredProcedure;
 
@@ -169,10 +175,12 @@ namespace Persistencia
                 cnn.Open();
                 SqlDataReader lector = cmd.ExecuteReader();
 
-                if (lector.Read())
+                if (lector.HasRows)
                 {
+                    lector.Read();
                     string nombre = (string)lector["Nombre"];
                     string mail = (string)lector["Mail"];
+
                     auxPeriodista = new Periodista(pCI, nombre, mail);
                 }
                 lector.Close();
@@ -188,6 +196,7 @@ namespace Persistencia
         public List<Periodista> Listar()
         {
             SqlConnection cnn = new SqlConnection(Conexion.Cnn);
+
             SqlCommand cmd = new SqlCommand("ListarPeriodistas ", cnn);
             cmd.CommandType = CommandType.StoredProcedure;
 
@@ -198,8 +207,9 @@ namespace Persistencia
                 cnn.Open();
                 SqlDataReader lector = cmd.ExecuteReader();
 
-                while (lector.Read())
+                while (lector.HasRows)
                 {
+                    lector.Read();
                     int ci = (int)lector["CI"];
                     string nombre = (string)lector["Nombre"];
                     string mail = (string)lector["Mail"];

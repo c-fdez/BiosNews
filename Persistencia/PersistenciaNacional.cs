@@ -11,9 +11,22 @@ namespace Persistencia
 {
     internal class PersistenciaNacional : IPersistenciaNacional
     {
+        //Singleton
+        private static PersistenciaNacional _instancia = null;
+        private PersistenciaNacional() { }
+        public static PersistenciaNacional GetInstancia()
+        {
+            if (_instancia == null)
+                _instancia = new PersistenciaNacional();
+
+            return _instancia;
+        }
+
+        //Operaciones
         public void Alta(Nacional pNacional)
         {
             SqlConnection cnn = new SqlConnection(Conexion.Cnn);
+
             SqlCommand cmd = new SqlCommand("AltaNacionales", cnn);
             cmd.CommandType = CommandType.StoredProcedure;
 
@@ -35,6 +48,7 @@ namespace Persistencia
             {
                 cnn.Open();
                 Transaction = cnn.BeginTransaction();
+
                 cmd.Transaction = Transaction;
                 cmd.ExecuteNonQuery();
 
@@ -46,8 +60,6 @@ namespace Persistencia
                         throw new Exception("Ya existe la noticia.");
                     case -3:
                         throw new Exception("El empleado no existe.");
-                    case -4:
-                        throw new Exception("Error al crear la noticia.");
                     default:
                         break;
                 }
@@ -70,6 +82,7 @@ namespace Persistencia
         public void Modificar(Nacional pNacional)
         {
             SqlConnection cnn = new SqlConnection(Conexion.Cnn);
+
             SqlCommand cmd = new SqlCommand("ModificarNacionales", cnn);
             cmd.CommandType = CommandType.StoredProcedure;
 
@@ -91,6 +104,7 @@ namespace Persistencia
             {
                 cnn.Open();
                 Transaction = cnn.BeginTransaction();
+
                 cmd.Transaction = Transaction;
                 cmd.ExecuteNonQuery();
 
@@ -102,13 +116,12 @@ namespace Persistencia
                         throw new Exception("No existe la noticia.");
                     case -3:
                         throw new Exception("El empleado no existe.");
-                    case -4:
-                        throw new Exception("Error al modificar la noticia.");
                     default:
                         break;
                 }
 
                 PersistenciaEscriben.GetInstancia().Eliminar(Transaction, pNacional.CodInt);
+
                 foreach(Periodista auxPeriodista in pNacional.Periodistas)
                 {
                     PersistenciaEscriben.GetInstancia().Agregar(Transaction, pNacional.CodInt, auxPeriodista);
@@ -127,7 +140,8 @@ namespace Persistencia
         public Nacional Buscar(string pCodInt)
         {
             SqlConnection cnn = new SqlConnection(Conexion.Cnn);
-            SqlCommand cmd = new SqlCommand("BuscarPeriodistaActivo", cnn);
+
+            SqlCommand cmd = new SqlCommand("BuscarNacional", cnn);
             cmd.CommandType = CommandType.StoredProcedure;
 
             cmd.Parameters.AddWithValue("@CodInt", pCodInt);
@@ -139,8 +153,9 @@ namespace Persistencia
                 cnn.Open();
                 SqlDataReader lector = cmd.ExecuteReader();
 
-                if (lector.Read())
+                if (lector.HasRows)
                 {
+                    lector.Read();
                     DateTime fecha = (DateTime)lector["FechaPub"];
                     string titulo = (string)lector["Titulo"];
                     string contenido = (string)lector["Contenido"];
@@ -148,7 +163,7 @@ namespace Persistencia
 
                     //Busco el empleado
                     string NomUsu = (string)lector["NomUsu"];
-                    Empleado auxEmpleado = PersistenciaEmpleado.GetInstancia().Buscar(NomUsu);
+                    Empleado Empleado = PersistenciaEmpleado.GetInstancia().Buscar(NomUsu);
 
                     //Busco los periodistas de la noticia
                     List<int> list = PersistenciaEscriben.GetInstancia().List(pCodInt);
@@ -158,9 +173,9 @@ namespace Persistencia
                         ListPeriodistas.Add(PersistenciaPeriodista.GetInstancia().BuscarTodos(ci));
                     }
                     //Busco la seccion a la que pertenece la noticia
-                    Seccion auxSeccion = PersistenciaSeccion.GetInstancia().BuscarTodos(pCodInt);
+                    Seccion Seccion = PersistenciaSeccion.GetInstancia().BuscarTodos(pCodInt);
 
-                    auxNacional = new Nacional(pCodInt, fecha, titulo, contenido, importancia, ListPeriodistas, auxEmpleado, auxSeccion);
+                    auxNacional = new Nacional(pCodInt, fecha, titulo, contenido, importancia, ListPeriodistas, Empleado, Seccion);
                 }
                 lector.Close();
             }
@@ -176,7 +191,8 @@ namespace Persistencia
         public List<Nacional> ListarDefault()
         {
             SqlConnection cnn = new SqlConnection(Conexion.Cnn);
-            SqlCommand cmd = new SqlCommand("ListarDefault", cnn);
+
+            SqlCommand cmd = new SqlCommand("ListarDefaultNacionales", cnn);
             cmd.CommandType = CommandType.StoredProcedure;
 
             List<Nacional> listNacional = null;
@@ -186,8 +202,9 @@ namespace Persistencia
                 cnn.Open();
                 SqlDataReader lector = cmd.ExecuteReader();
 
-                while (lector.Read())
+                while (lector.HasRows)
                 {
+                    lector.Read();
                     string codint = (string)lector["CodInt"];
                     DateTime fecha = (DateTime)lector["FechaPub"];
                     string titulo = (string)lector["Titulo"];
@@ -196,7 +213,7 @@ namespace Persistencia
 
                     //Busco el empleado
                     string NomUsu = (string)lector["NomUsu"];
-                    Empleado auxEmpleado = PersistenciaEmpleado.GetInstancia().Buscar(NomUsu);
+                    Empleado Empleado = PersistenciaEmpleado.GetInstancia().Buscar(NomUsu);
 
                     //Busco los periodistas de la noticia
                     List<int> list = PersistenciaEscriben.GetInstancia().List(codint);
@@ -207,9 +224,62 @@ namespace Persistencia
                     }
 
                     //Busco la seccion a la que pertenece la noticia
-                    Seccion auxSeccion = PersistenciaSeccion.GetInstancia().BuscarTodos(codint);
+                    string codsec = (string)lector["CodSec"];
+                    Seccion Seccion = PersistenciaSeccion.GetInstancia().BuscarTodos(codsec);
 
-                    listNacional.Add(new Nacional(codint, fecha, titulo, contenido, importancia, ListPeriodistas, auxEmpleado, auxSeccion));
+                    listNacional.Add(new Nacional(codint, fecha, titulo, contenido, importancia, ListPeriodistas, Empleado, Seccion));
+                }
+                lector.Close();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("DataBase: " + ex.Message);
+            }
+            finally
+            { cnn.Close(); }
+
+            return listNacional;
+        }
+        public List<Nacional> ListarPublicados()
+        {
+            SqlConnection cnn = new SqlConnection(Conexion.Cnn);
+
+            SqlCommand cmd = new SqlCommand("ListarPublicadosNacionales", cnn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            List<Nacional> listNacional = null;
+
+            try
+            {
+                cnn.Open();
+                SqlDataReader lector = cmd.ExecuteReader();
+
+                while (lector.HasRows)
+                {
+                    lector.Read();
+                    string codint = (string)lector["CodInt"];
+                    DateTime fecha = (DateTime)lector["FechaPub"];
+                    string titulo = (string)lector["Titulo"];
+                    string contenido = (string)lector["Contenido"];
+                    int importancia = (int)lector["Importancia"];
+
+                    //Busco el empleado
+                    string NomUsu = (string)lector["NomUsu"];
+                    Empleado Empleado = PersistenciaEmpleado.GetInstancia().Buscar(NomUsu);
+
+                    //Busco los periodistas de la noticia
+                    List<int> list = PersistenciaEscriben.GetInstancia().List(codint);
+                    List<Periodista> ListPeriodistas = null;
+                    foreach (int ci in list)
+                    {
+                        ListPeriodistas.Add(PersistenciaPeriodista.GetInstancia().BuscarTodos(ci));
+                    }
+
+                    //Busco la seccion a la que pertenece la noticia
+                    string codsec = (string)lector["CodSec"];
+                    Seccion Seccion = PersistenciaSeccion.GetInstancia().BuscarTodos(codsec);
+
+                    listNacional.Add(new Nacional(codint, fecha, titulo, contenido, importancia, ListPeriodistas, Empleado, Seccion));
                 }
                 lector.Close();
             }

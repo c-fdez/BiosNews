@@ -27,7 +27,6 @@ namespace Persistencia
         {
             SqlCommand cmd = new SqlCommand("AltaEscriben", pTransaction.Connection);
             cmd.CommandType = CommandType.StoredProcedure;
-
             cmd.Parameters.AddWithValue("@CodInt", pCodInt);
             cmd.Parameters.AddWithValue("@CI", pPeriodista.Ci);
 
@@ -61,9 +60,11 @@ namespace Persistencia
         }
         internal void Eliminar(SqlTransaction pTransaction, string pCodInt)
         {
+            //En este eliminar paso una Transaccion por parametro porque esta dentro de la operacion modificar noticia que tiene una transaccion.
+            //NO lo hago porque este eliminar necesite en si una transaccion.
             SqlCommand cmd = new SqlCommand("BajaEscriben", pTransaction.Connection);
-            cmd.CommandType = CommandType.StoredProcedure;
 
+            cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@CodInt", pCodInt);
 
             SqlParameter retorno = new SqlParameter();
@@ -94,9 +95,9 @@ namespace Persistencia
         internal List<int> List(string pCodInt)
         {
             SqlConnection cnn = new SqlConnection(Conexion.Cnn);
+
             SqlCommand cmd = new SqlCommand("ListarEscriben", cnn);
             cmd.CommandType = CommandType.StoredProcedure;
-
             cmd.Parameters.AddWithValue("@CodInt", pCodInt);
 
             List<int> list = null;
@@ -106,12 +107,13 @@ namespace Persistencia
                 cnn.Open();
                 SqlDataReader lector = cmd.ExecuteReader();
 
-                while (lector.Read())
+                while (lector.HasRows)
                 {
+                    lector.Read();
                     list.Add((int)lector["CI"]);
                 }
-                lector.Close();
 
+                lector.Close();
             }
             catch (Exception ex)
             {
@@ -123,6 +125,5 @@ namespace Persistencia
             }
             return list;
         }
-
     }
 }

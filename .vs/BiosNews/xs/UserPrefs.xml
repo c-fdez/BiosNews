@@ -1,12 +1,5 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workbench ActiveDocument="Persistencia/PersistenciaNacional.cs">
-    <Files>
-      <File FileName="Persistencia/PersistenciaPeriodista.cs" Line="1" Column="1" />
-      <File FileName="Persistencia/PersistenciaSeccion.cs" Line="186" Column="38" />
-      <File FileName="Persistencia/PersistenciaEmpleado.cs" Line="1" Column="1" />
-      <File FileName="Persistencia/PersistenciaEscriben.cs" Line="93" Column="10" />
-      <File FileName="Persistencia/PersistenciaNacional.cs" Line="1" Column="1" />
-    </Files>
+  <MonoDevelop.Ide.Workbench>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
