@@ -7,7 +7,7 @@ using EntidadesCompartidas;
 
 namespace Persistencia
 {
-    interface IPersistenciaEmpleado
+    public interface IPersistenciaEmpleado
     {
         void Alta(Empleado pEmpleado);
         Empleado Buscar(string pNomUsu);

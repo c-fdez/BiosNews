@@ -1,13 +1,15 @@
 ﻿<Properties>
+  <MonoDevelop.Ide.ItemProperties.Logica FirstBuild="True" />
   <MonoDevelop.Ide.Workbench>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="BiosNews" expanded="True">
             <Node name="EntidadesCompartidas" expanded="True" />
-            <Node name="Persistencia" expanded="True">
-              <Node name="PersistenciaNacional.cs" selected="True" />
+            <Node name="Logica" expanded="True">
+              <Node name="LogicaPeriodista.cs" selected="True" />
             </Node>
+            <Node name="Persistencia" expanded="True" />
           </Node>
         </State>
       </Pad>

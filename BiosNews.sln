@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "BiosNews", ".", "{22D34F0E-C3E8-4E8A-B8BD-F0DABB30A7BD}"
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "BiosNews", "", "{22D34F0E-C3E8-4E8A-B8BD-F0DABB30A7BD}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5.2"
 		Debug.AspNetCompiler.VirtualPath = "/localhost_54143"
@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntidadesCompartidas", "Ent
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistencia", "Persistencia\Persistencia.csproj", "{D3942971-0F14-4D3C-BB44-A8847B93CC47}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logica", "Logica\Logica.csproj", "{556D369C-4307-4930-B708-B27CD7AD848C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{D3942971-0F14-4D3C-BB44-A8847B93CC47}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D3942971-0F14-4D3C-BB44-A8847B93CC47}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D3942971-0F14-4D3C-BB44-A8847B93CC47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{556D369C-4307-4930-B708-B27CD7AD848C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{556D369C-4307-4930-B708-B27CD7AD848C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{556D369C-4307-4930-B708-B27CD7AD848C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{556D369C-4307-4930-B708-B27CD7AD848C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

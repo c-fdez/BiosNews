@@ -7,7 +7,7 @@ using EntidadesCompartidas;
 
 namespace Persistencia
 {
-    interface IPersistenciaNacional
+    public interface IPersistenciaNacional
     {
         void Alta(Nacional pNacional);
         void Modificar(Nacional pNacional);
